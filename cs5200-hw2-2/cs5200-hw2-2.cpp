@@ -117,9 +117,6 @@ bool ktour()
   int kx = rand() % SZ;
   int ky = rand() % SZ;
 
-  ky = 0;
-  kx = 0;
-
   cout << kx << "," << ky << endl;
 
   sol[kx][ky] = 0;
@@ -158,7 +155,7 @@ int ktour(int x, int y, int movei, int sol[SZ][SZ],
 	return res;
   }
 
-  printboard(sol);
+  //printboard(sol);
 
   moveorder(x, y, sol, om);
 
