@@ -12,21 +12,21 @@ const int SZ = 8;
 const int B_NEVER = -1;
 const int MV_SZ = 8;
 
-int ktour(int x, int y, int movei, int sol[SZ][SZ], int xMove[], int yMove[]);
+int ktour(const int x, const int y, const int movei, int sol[SZ][SZ], const int xMove[], const int yMove[]);
 
-bool validmove(int x, int y, int sol[SZ][SZ])
+bool validmove(const int x,const int y, const int sol[SZ][SZ])
 {
   return (x >= 0 && x < SZ && y >= 0 &&
 	y < SZ && sol[x][y] == -1);
 }
 
-bool finalmove(int x, int y, int sol[SZ][SZ])
+bool finalmove(const int x, const int y, const int sol[SZ][SZ])
 {
   return (x >= 0 && x < SZ && y >= 0 &&
 	y < SZ && sol[x][y] == 0);
 }
 
-void printboard(int sol[SZ][SZ])
+void printboard(const int sol[SZ][SZ])
 {
   for (int x = 0; x < SZ; x++)
   {
@@ -36,7 +36,7 @@ void printboard(int sol[SZ][SZ])
   }
 }
 
-int possiblemoves(int x, int y, int sol[SZ][SZ])
+int possiblemoves(const int x, const int y,const int sol[SZ][SZ])
 {
   int k;
   int next_x, next_y;
@@ -58,7 +58,7 @@ int possiblemoves(int x, int y, int sol[SZ][SZ])
   return count;
 }
 
-void moveorder(int x, int y, int sol[SZ][SZ], int sorted[MV_SZ])
+void moveorder(const int x, const int y, const int sol[SZ][SZ], int sorted[MV_SZ])
 {
   int k,j;
   int next_x, next_y;
@@ -133,8 +133,7 @@ bool ktour()
   return true;
 }
 
-int ktour(int x, int y, int movei, int sol[SZ][SZ],
-  int xMove[SZ], int yMove[SZ])
+int ktour(const int x, const int y, const int movei, int sol[SZ][SZ], const int xMove[SZ], const int yMove[SZ])
 {
   int k, next_x, next_y;
   int om[MV_SZ];
@@ -155,8 +154,6 @@ int ktour(int x, int y, int movei, int sol[SZ][SZ],
 	}
 	return res;
   }
-
-  //printboard(sol);
 
   moveorder(x, y, sol, om);
 
