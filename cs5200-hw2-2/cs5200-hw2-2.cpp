@@ -4,11 +4,13 @@
 #include "stdafx.h"
 #include <cstdlib>
 #include <iostream>
+#include <time.h>
 
 using namespace std;
 
 const int SZ = 8;
 const int B_NEVER = -1;
+const int MV_SZ = 8;
 
 int ktour(int x, int y, int movei, int sol[SZ][SZ], int xMove[], int yMove[]);
 
@@ -43,7 +45,7 @@ int possiblemoves(int x, int y, int sol[SZ][SZ])
   int xMove[SZ] = { 2, 1, -1, -2, -2, -1,  1,  2 };
   int yMove[SZ] = { 1, 2,  2,  1, -1, -2, -2, -1 };
 
-  for (k = 0; k < 8; k++)
+  for (k = 0; k < MV_SZ; k++)
   {
 	next_x = x + xMove[k];
 	next_y = y + yMove[k];
@@ -56,17 +58,17 @@ int possiblemoves(int x, int y, int sol[SZ][SZ])
   return count;
 }
 
-void moveorder(int x, int y, int sol[SZ][SZ], int sorted[8])
+void moveorder(int x, int y, int sol[SZ][SZ], int sorted[MV_SZ])
 {
   int k,j;
   int next_x, next_y;
   int count = 0;
-  int result[8];
+  int result[MV_SZ];
 
   int xMove[SZ] = { 2, 1, -1, -2, -2, -1,  1,  2 };
   int yMove[SZ] = { 1, 2,  2,  1, -1, -2, -2, -1 };
 
-  for (k = 0; k < 8; k++)
+  for (k = 0; k < MV_SZ; k++)
   {
 	next_x = x + xMove[k];
 	next_y = y + yMove[k];
@@ -76,7 +78,7 @@ void moveorder(int x, int y, int sol[SZ][SZ], int sorted[8])
   int mini;
   int minv;
 
-  for (k = 0; k < 8; k++)
+  for (k = 0; k < MV_SZ; k++)
   {
 	j = 0;
 	do
@@ -86,7 +88,7 @@ void moveorder(int x, int y, int sol[SZ][SZ], int sorted[8])
 	  j++;
 	} while (minv == -1);
 	
-	for (; j < 8; j++)
+	for (; j < MV_SZ; j++)
 	{
 	  if (result[j] < minv && result[j] != -1)
 	  {
@@ -117,7 +119,6 @@ bool ktour()
   int kx = rand() % SZ;
   int ky = rand() % SZ;
 
-  cout << kx << "," << ky << endl;
 
   sol[kx][ky] = 0;
 
@@ -136,13 +137,13 @@ int ktour(int x, int y, int movei, int sol[SZ][SZ],
   int xMove[SZ], int yMove[SZ])
 {
   int k, next_x, next_y;
-  int om[8];
+  int om[MV_SZ];
 
   if (movei == SZ*SZ)
   {
 	k = 0;
 	bool res = false;
-	while (!res && k < 8)
+	while (!res && k < MV_SZ)
 	{
 	  next_x = x + xMove[k];
 	  next_y = y + yMove[k];
@@ -160,7 +161,7 @@ int ktour(int x, int y, int movei, int sol[SZ][SZ],
   moveorder(x, y, sol, om);
 
 
-  for (k = 0; k < 8; k++)
+  for (k = 0; k < MV_SZ; k++)
   {
 	next_x = x + xMove[om[k]];
 	next_y = y + yMove[om[k]];
@@ -181,6 +182,8 @@ int ktour(int x, int y, int movei, int sol[SZ][SZ],
 }
 int main()
 {
+  srand(time(NULL));
+
   char x;
   ktour();
 
