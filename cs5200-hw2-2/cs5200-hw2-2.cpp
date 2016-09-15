@@ -207,40 +207,59 @@ bool ktour(const int x, const int y, const int movei, int sol[SZ][SZ], const int
   int k, next_x, next_y;
   int om[MV_SZ];
 
+  //if board full
   if (movei == SZ*SZ)
   {
 	k = 0;
 	bool res = false;
+	
+	//while a move to the start position has not been found
+	//AND still move moves to test
 	while (!res && k < MV_SZ)
 	{
+	  //simulate a move
 	  next_x = x + xMove[k];
 	  next_y = y + yMove[k];
+
+	  //check if that move gets you to the start position
 	  if (finalmove(next_x, next_y, sol))
 	  {
 		res = true;
 	  }
 	  k++;
 	}
+
+	//return true if at least one valid move gets to 
+	//start position
 	return res;
   }
 
+  //order the possible moves from the current location
+  //so move that leads to fewest sub-moves attempted first
   moveorder(x, y, sol, om);
 
-
+  //for all moves from the location
   for (k = 0; k < MV_SZ; k++)
   {
+	//simulate the move
+	//om[k] gives the index of the move with the kth lowest
+	//number of possible moves from the that location
 	next_x = x + xMove[om[k]];
 	next_y = y + yMove[om[k]];
 
 
+	//if move actually valid
 	if (validmove(next_x, next_y, sol))
 	{
+	  //mark the location with the move number
 	  sol[next_x][next_y] = movei;
+	  
+	  //recursive call
 	  if (ktour(next_x, next_y, movei + 1, sol,
 		xMove, yMove) == true)
 		return true;
 	  else
-		sol[next_x][next_y] = B_NEVER;
+		sol[next_x][next_y] = B_NEVER; //reset when backtracking
 	}
   }
 
