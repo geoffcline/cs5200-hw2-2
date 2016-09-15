@@ -1,5 +1,7 @@
-// cs5200-hw2-2.cpp : Defines the entry point for the console application.
-//
+// CS5200-A HW2
+// 9/14/2016
+// Geoffrey Cline
+// Knight's Closed Tour
 
 #include "stdafx.h"
 #include <cstdlib>
