@@ -3,8 +3,9 @@
 // Geoffrey Cline
 // Knight's Closed Tour
 
-#include "stdafx.h"
+//include "stdafx.h"
 #include <cstdlib>
+#include <cstdio>
 #include <iostream>
 #include <time.h>
 
